@@ -1,4 +1,4 @@
-5) Score 
+# Score 
 import joblib
 import json
 import numpy as np
