@@ -7,7 +7,7 @@ from azureml.core.model import Model
 # Initialize the model
 def init():
     global model_3
-    model_3 = joblib.load('rf_model_500.pkl')  # Load from the local file
+    model_3 = joblib.load('model_estimator_500.pkl')  # Load from the local file
 
 # Function to make predictions
 def run(raw_data):
