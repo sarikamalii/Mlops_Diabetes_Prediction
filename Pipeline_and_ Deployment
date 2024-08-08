@@ -142,3 +142,11 @@ datastore= Datastore.get(ws, "workspaceblobstore")
 df= Dataset.Tabular.from_delimited_files(path=[(datastore,"preproessed.csv")]).to_pandas_dataframe()
 df.head()
 
+#Make Predictions Using the Deployed Service
+#Convert to JSON: Take the first 5 rows of the data (for testing) and convert them to a list. 
+#convert this list to a JSON string. This JSON string will be used as the input for the prediction request.
+#service.run(test_sample) method sends the JSON input to the model and retrieves the predictions
+import json
+test_sample=json.dumps({'data':df_new[:5].tolist()})
+predictions=service.run(test_sample)
+predictions
