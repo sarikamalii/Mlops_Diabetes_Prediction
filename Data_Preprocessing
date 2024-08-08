@@ -47,11 +47,11 @@ df['BMI'] = df['BMI'].replace(0, df['BMI'].median())
 #Transform them
 df_selected = df[['Pregnancies','Glucose','SkinThickness','BMI','Age','Insulin','DiabetesPedigreeFunction','BloodPressure']]
 x = df_selected
-standard = StandardScalar()
-X = standard.fit_transform(x)
-df_new = standard.transform(X)
+scaler = StandardScaler()
+X = scaler.fit_transform(x)
+df_new = scaler.transform(X)
 df_new = pd.DataFrame(X)
-df_new.columns = ['Pregnancies','Glucose','SkinThickness','BMI','Age','Insulin','DiabetesPedigreeFunction','BloodPressure']
+df_new.columns = ['Pregnancies','Glucose','SkinThickness','BMI','Age','Insulin','DiabetesPedigreeFunction','BloodPressure','Outcome']
 
 #------------------------------Export Data-------------------------------#
 path = "tmp/"
