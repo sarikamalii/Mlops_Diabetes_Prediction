@@ -76,8 +76,6 @@ run= Run.get_context()
 for i in n_estimators:
     model_rf = RandomForestClassifier(n_estimators=i).fit(X_train, y_train)
     pred_rf=model_rf.predict(X_test)
-    rmse = math.sqrt(mean_squared_error(y_true = y_test, y_pred = pred_rf))
-    run.log("rmse", rmse)
     run.log("train_split_size", X_train.size)
     run.log("test_split_size", test_size)
     run.log("n_estimators", i)
