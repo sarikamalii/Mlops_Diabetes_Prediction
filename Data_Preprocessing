@@ -36,8 +36,6 @@ run = Run.get_context()
 df = Dataset.Tabular.from_delimited_files(path=[(datastore, args.prep)]).to_pandas_dataframe()
 
 #------------------------------Transf/prep-------------------------------#
-#Drop duplicates
-df = df.drop_duplicates()
 
 #Pregnancies	Glucose	BloodPressure	SkinThickness	Insulin	BMI	DiabetesPedigreeFunction	Age	Outcome
 df['Glucose'] = df['Glucose'].replace(0, df['Glucose'].mean())
@@ -47,13 +45,13 @@ df['Insulin'] = df['Insulin'].replace(0, df['Insulin'].median())
 df['BMI'] = df['BMI'].replace(0, df['BMI'].median())
 
 #Transform them
-df_selected = df[['Pregnancies','Glucose','SkinThickness','BMI','Age','Outcome']]
+df_selected = df[['Pregnancies','Glucose','SkinThickness','BMI','Age','Insulin','DiabetesPedigreeFunction','BloodPressure']]
 x = df_selected
-quantile = QuantileTransformer()
-X = quantile.fit_transform(x)
-df_new = quantile.transform(X)
+standard = StandardScalar()
+X = standard.fit_transform(x)
+df_new = standard.transform(X)
 df_new = pd.DataFrame(X)
-df_new.columns = ['Pregnancies','Glucose','SkinThickness','BMI','Age','Outcome']
+df_new.columns = ['Pregnancies','Glucose','SkinThickness','BMI','Age','Insulin','DiabetesPedigreeFunction','BloodPressure']
 
 #------------------------------Export Data-------------------------------#
 path = "tmp/"
